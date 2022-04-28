@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const isBlue = false;
+
+const rootElement: HTMLElement | null = document.getElementById('root') as HTMLDivElement;
+
+const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <App isBlueTheme={isBlue} />
   </React.StrictMode>
 );
 
