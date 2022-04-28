@@ -1,9 +1,11 @@
 import { injectGlobal } from '@emotion/css'
 import font from './font';
+import { ThemeType } from "./ThemeType";
 
 const fontName = 'Beatrice';
 
-const globals =  injectGlobal`
+export default function setGlobalCss(theme: ThemeType): void {
+  injectGlobal`
   * {
     box-sizing: border-box;
   }
@@ -59,15 +61,14 @@ const globals =  injectGlobal`
   body {
     margin: 0;
     font-size: 100%;
-    font-family: ${font.fontFamily.base};
+    font-family: ${theme.font.family.base};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   code {
-    font-family: ${font.fontFamily.code},
+    font-family: ${theme.font.family.code},
     monospace;
   }
 `;
-
-export default globals;
+};

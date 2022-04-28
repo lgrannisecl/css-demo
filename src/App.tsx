@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import logo from './logo.svg';
-// import './App.css';
 import { css, keyframes, cx } from '@emotion/css';
+import themeBuilder from "./styles/themeBuilder";
 
 import NoLeakageText from "./components/NoLeakageText";
+import { ThemeContext } from "./components/ThemeProvider";
 
-import './styles/global/globals';
+import { ThemeType } from "./styles/global/ThemeType";
 
 const appLogoSpin = keyframes`
   from {
@@ -22,11 +24,20 @@ const centeredBlock = css`
   transform: translate(-50%, -50%);
 `;
 
-const styles = {
-  app: css`
-      background: red;
+function App(): JSX.Element | null {
+
+  const theme = useContext(ThemeContext) as ThemeType;
+
+  /* eslint-disable-next-line */
+  console.log('App theme', theme);
+
+  if (!theme) return null;
+
+  const styles = themeBuilder(theme,(theme) => ({
+    app: css`
+      background: ${ theme.color.background };
     `,
-  logo: css`
+    logo: css`
     height: 40vmin;
     pointer-events: none;
 
@@ -34,8 +45,7 @@ const styles = {
         animation: ${appLogoSpin} infinite 20s linear;
     }
   `,
-  header: css`
-    background-color: #282c34;
+    header: css`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -47,17 +57,13 @@ const styles = {
       font-size: 2rem;
     }
   `,
-  headerText: css`
+    headerText: css`
     font-size: 4em;
   `,
-  blue: css`
-    background-color: blue;
-  `,
-
-  link: css`
+    link: css`
     color: #61dafb;
   `,
-  centeredContent: css`
+    centeredContent: css`
     ${centeredBlock};
     border-radius: 100%;
     display: flex;
@@ -66,22 +72,19 @@ const styles = {
     text-align: center;
     width: 10vh;
     height: 10vh;
-    background: red;
+    background: ${theme.color.red};
     position: absolute;
     &:after {
       content: "Centered Content"
     }
   `
-}
+  }));
 
-type AppProps = {
-  isBlueTheme: boolean;
-};
+  if (!styles) return null;
 
-function App(props: AppProps): JSX.Element {
   return (
     <div className={styles.app}>
-      <header className={cx([styles.header, { [styles.blue]: props.isBlueTheme }])}>
+      <header className={styles.header}>
         <img src={logo} className={styles.logo} alt="logo" />
         <NoLeakageText className={styles.headerText}>Yay!</NoLeakageText>
       </header>

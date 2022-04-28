@@ -2,15 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ThemeProvider from "./components/ThemeProvider";
 
-const isBlue = false;
+let isDarkTheme = true;
 
 const rootElement: HTMLElement | null = document.getElementById('root') as HTMLDivElement;
+
+setTimeout(() => {
+  isDarkTheme = true;
+}, 3000);
 
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <App isBlueTheme={isBlue} />
+    <ThemeProvider isDarkTheme={isDarkTheme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
