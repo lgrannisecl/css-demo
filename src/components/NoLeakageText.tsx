@@ -18,11 +18,11 @@ const styles = {
   `,
   noText: css`
     color: purple;
-    font-size: 1.25rem;
+    font-size: 1.25em;
   `,
   leakageText: css`
     color: orange;
-    font-size: 1.5rem;
+    font-size: 1.5em;
   `
 }
 

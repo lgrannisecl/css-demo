@@ -43,14 +43,12 @@ const styles = {
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    
-    /*&.blue {
-      background-color: blue;
-    }*/
-    
     p {
       font-size: 2rem;
     }
+  `,
+  headerText: css`
+    font-size: 4em;
   `,
   blue: css`
     background-color: blue;
@@ -85,10 +83,7 @@ function App(props: AppProps): JSX.Element {
     <div className={styles.app}>
       <header className={cx([styles.header, { [styles.blue]: props.isBlueTheme }])}>
         <img src={logo} className={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <NoLeakageText>Yay!</NoLeakageText>
+        <NoLeakageText className={styles.headerText}>Yay!</NoLeakageText>
       </header>
       <div className={styles.centeredContent} />
     </div>
